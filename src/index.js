@@ -9,7 +9,7 @@ import wasm from "quantlib-wasm/dist/quantlib.wasm";
 const QuantLib = loader({ locateFile: (path) => (path.endsWith(".wasm") ? wasm : path) });
 
 QuantLib.onRuntimeInitialized = () => {
-    console.log(QuantLib.version);
+    console.log(`QuantLib v${QuantLib.version} loaded`);
 };
 
 ReactDOM.render(<App />, document.getElementById('root'));

@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import loader from "quantlib-wasm";
+import wasm from "quantlib-wasm/dist/quantlib.wasm";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        const QuantLib = loader({ locateFile: (path) => (path.endsWith(".wasm") ? wasm : path) });
+        QuantLib.onRuntimeInitialized = () => {
+            this.setState({ status: "Done!", QuantLib });
+        };
+        this.state = { status: "Loading...", QuantLib };
+    }
+    render() {
+        const { status, QuantLib } = this.state;
+        return <h2>{status + (QuantLib.version ? ` Version ${QuantLib.version} loaded` : ``)}</h2>;
+    }
 }
 
 export default App;

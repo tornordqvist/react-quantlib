@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@captor/react-scripts": "3.1.1-a",
+    "@captor/react-scripts": "5.0.0",
     "quantlib-wasm": "^1.16.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
